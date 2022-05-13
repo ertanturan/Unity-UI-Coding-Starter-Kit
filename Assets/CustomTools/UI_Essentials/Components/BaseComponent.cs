@@ -1,16 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BaseComponent<T> : MonoBehaviour where T : Selectable
+namespace CustomTools.UI_Essentials.Components
 {
-    public  T Component { get => _component; private set => _component = value; }
-    private T _component;
-
-    protected virtual void Awake()
+    public class BaseComponent<T> : MonoBehaviour where T : Selectable
     {
-        Component = GetComponent<T>();
+        public  T Component { get => _component; private set => _component = value; }
+        private T _component;
+
+        protected virtual void Awake()
+        {
+            Component = GetComponent<T>();
+        }
     }
 }
