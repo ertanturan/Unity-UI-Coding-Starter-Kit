@@ -2,6 +2,9 @@ using UnityEngine.UI;
 
 namespace CustomTools.UI_Essentials.Components
 {
+    using UnityEngine;
+
+    [RequireComponent(typeof(Slider))]
     public abstract class SliderComponent : BaseComponent<Slider>
     {
         protected override void Awake()
