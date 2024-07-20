@@ -1,14 +1,11 @@
-using UnityEngine;
+using TMPro;
 
 namespace CustomTools.UI_Essentials.Components
 {
-    using System;
-    using TMPro;
-    using UnityEngine.EventSystems;
-    using UnityEngine.UI;
+    using UnityEngine;
 
-    [RequireComponent(typeof(Dropdown))]
-    public abstract class DropdownComponent : BaseComponent<Dropdown>
+    [RequireComponent(typeof(TMP_Dropdown))]
+    public abstract class DropdownComponent : BaseComponent<TMP_Dropdown>
     {
         protected override void Awake()
         {
