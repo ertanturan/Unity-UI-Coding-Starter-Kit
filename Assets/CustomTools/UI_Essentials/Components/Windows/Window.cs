@@ -114,39 +114,3 @@ public abstract class Window : MonoBehaviour, IWindow
 
 	protected abstract IEnumerator ExecuteTransition(WindowTransitionArgs args, Action callback);
 }
-
-public interface IWindow
-{
-	public bool ShowAtStart { get; set; }
-
-	public bool IsWindowsShown { get; set; }
-
-	public event EventHandler<WindowEventArgs> OnWindowStateChanged;
-	public void Show();
-	public void Hide();
-
-	public void Initialize();
-	public void Setup();
-	public void TearDown();
-	public void Toggle();
-}
-
-public class WindowTransitionArgs
-{
-	public bool ShouldShow { get; set; }
-
-	public WindowTransitionArgs(bool shouldShow)
-	{
-		ShouldShow = shouldShow;
-	}
-}
-
-public class WindowEventArgs : EventArgs
-{
-	public bool IsShown { get; private set; }
-
-	public WindowEventArgs(bool isShown)
-	{
-		IsShown = isShown;
-	}
-}
