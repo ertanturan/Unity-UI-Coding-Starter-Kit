@@ -1,3 +1,9 @@
+// Created by : Ertan TURAN
+// Created : 20 / 07 / 2024
+// Last change : 20 / 07 / 2024
+// File Name : ToggleComponent.cs
+// Project Name : CustomTools.UI_Essentials
+
 using UnityEngine.UI;
 
 namespace CustomTools.UI_Essentials.Components

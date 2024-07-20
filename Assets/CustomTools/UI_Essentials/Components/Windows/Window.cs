@@ -1,3 +1,9 @@
+// Created by : Ertan TURAN
+// Created : 20 / 07 / 2024
+// Last change : 20 / 07 / 2024
+// File Name : Window.cs
+// Project Name : CustomTools.UI_Essentials
+
 using System;
 using System.Collections;
 using UnityEngine;
@@ -14,6 +20,10 @@ public abstract class Window : MonoBehaviour, IWindow
 	[field: SerializeField]
 	protected float TransitionDuration = 1f;
 
+	readonly private WindowTransitionArgs _hideArgs = new WindowTransitionArgs(false);
+	readonly private WindowTransitionArgs _showArgs = new WindowTransitionArgs(true);
+	private bool _isWindowsShown;
+
 	public bool ToggleHandle
 	{
 		set
@@ -29,10 +39,6 @@ public abstract class Window : MonoBehaviour, IWindow
 		}
 	}
 
-	readonly private WindowTransitionArgs _hideArgs = new WindowTransitionArgs(false);
-	readonly private WindowTransitionArgs _showArgs = new WindowTransitionArgs(true);
-	private bool _isWindowsShown;
-
 	protected void Awake()
 	{
 		Initialize();
@@ -40,11 +46,16 @@ public abstract class Window : MonoBehaviour, IWindow
 		{
 			Show();
 		}
+
 		else if (!ShowAtStart)
+
 		{
 			Hide();
 		}
 	}
+
+
+	public event EventHandler<WindowEventArgs> OnWindowStateChanged;
 
 	[field: SerializeField]
 	public bool ShowAtStart
@@ -77,7 +88,6 @@ public abstract class Window : MonoBehaviour, IWindow
 		}
 	}
 
-	public event EventHandler<WindowEventArgs> OnWindowStateChanged;
 
 	public abstract void Initialize();
 	public abstract void Setup();
