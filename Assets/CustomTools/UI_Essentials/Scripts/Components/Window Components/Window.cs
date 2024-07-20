@@ -20,6 +20,13 @@ public abstract class Window : MonoBehaviour, IWindow
 	[field: SerializeField]
 	protected float TransitionDuration = 1f;
 
+	[field: SerializeField]
+	public bool ShowAtStart
+	{
+		get;
+		set;
+	}
+
 	readonly private WindowTransitionArgs _hideArgs = new WindowTransitionArgs(false);
 	readonly private WindowTransitionArgs _showArgs = new WindowTransitionArgs(true);
 	private bool _isWindowsShown;
@@ -37,31 +44,6 @@ public abstract class Window : MonoBehaviour, IWindow
 				Show();
 			}
 		}
-	}
-
-	protected void Awake()
-	{
-		Initialize();
-		if (ShowAtStart)
-		{
-			Show();
-		}
-
-		else if (!ShowAtStart)
-
-		{
-			Hide();
-		}
-	}
-
-
-	public event EventHandler<WindowEventArgs> OnWindowStateChanged;
-
-	[field: SerializeField]
-	public bool ShowAtStart
-	{
-		get;
-		set;
 	}
 
 	public bool IsWindowsShown
@@ -87,6 +69,24 @@ public abstract class Window : MonoBehaviour, IWindow
 			}
 		}
 	}
+
+	protected void Awake()
+	{
+		Initialize();
+		if (ShowAtStart)
+		{
+			Show();
+		}
+
+		else if (!ShowAtStart)
+
+		{
+			Hide();
+		}
+	}
+
+
+	public event EventHandler<WindowEventArgs> OnWindowStateChanged;
 
 
 	public abstract void Initialize();
