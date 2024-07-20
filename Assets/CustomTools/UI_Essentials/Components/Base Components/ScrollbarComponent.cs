@@ -10,12 +10,6 @@ namespace CustomTools.UI_Essentials.Components
 			onValueChanged.AddListener(OnValueChanged);
 		}
 
-		public Scrollbar Component
-		{
-			get;
-			set;
-		}
-
 		protected abstract void OnValueChanged(float value);
 	}
 }

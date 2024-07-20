@@ -12,13 +12,7 @@ namespace CustomTools.UI_Essentials.Components
 			onSelect.AddListener(OnSelect);
 			onDeselect.AddListener(OnDeselect);
 		}
-
-		public TMP_InputField Component
-		{
-			get;
-			set;
-		}
-
+		
 		protected abstract void OnValueChanged(string value);
 		protected abstract void OnEndEdit(string value);
 		protected abstract void OnSelect(string value);
