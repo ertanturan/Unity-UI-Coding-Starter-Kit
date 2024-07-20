@@ -5,7 +5,10 @@ using UnityEngine.Events;
 
 public abstract class Window : MonoBehaviour, IWindow
 {
+	// ReSharper disable once InconsistentNaming
 	public UnityEvent<bool> OnWindowHid;
+
+	// ReSharper disable once InconsistentNaming
 	public UnityEvent<bool> OnWindowShown;
 
 	[field: SerializeField]
