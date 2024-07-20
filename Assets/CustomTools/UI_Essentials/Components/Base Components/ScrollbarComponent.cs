@@ -1,18 +1,21 @@
-using UnityEngine;
+using UnityEngine.UI;
 
 namespace CustomTools.UI_Essentials.Components
 {
-    using UnityEngine.UI;
+	public abstract class ScrollbarComponent : Scrollbar, IComponent<Scrollbar>
+	{
+		protected override void Awake()
+		{
+			base.Awake();
+			onValueChanged.AddListener(OnValueChanged);
+		}
 
-    [RequireComponent(typeof(Scrollbar))]
-    public abstract class ScrollbarComponent : BaseComponent<Scrollbar>
-    {
-        protected override void Awake()
-        {
-            base.Awake();
-            Component.onValueChanged.AddListener(OnValueChanged);
-        }
+		public Scrollbar Component
+		{
+			get;
+			set;
+		}
 
-        protected abstract void OnValueChanged(float value);
-    }
+		protected abstract void OnValueChanged(float value);
+	}
 }

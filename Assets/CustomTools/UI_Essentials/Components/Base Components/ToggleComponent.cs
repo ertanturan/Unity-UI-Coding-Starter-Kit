@@ -2,17 +2,20 @@ using UnityEngine.UI;
 
 namespace CustomTools.UI_Essentials.Components
 {
-    using UnityEngine;
+	public abstract class ToggleComponent : Toggle, IComponent<Toggle>
+	{
+		protected override void Awake()
+		{
+			base.Awake();
+			onValueChanged.AddListener(OnValueChanged);
+		}
 
-    [RequireComponent(typeof(Toggle))]
-    public abstract class ToggleComponent : BaseComponent<Toggle>
-    {
-        protected override void Awake()
-        {
-            base.Awake();
-            Component.onValueChanged.AddListener(OnValueChanged);
-        }
+		public Toggle Component
+		{
+			get;
+			set;
+		}
 
-        protected abstract void OnValueChanged(bool value);
-    }
+		protected abstract void OnValueChanged(bool value);
+	}
 }

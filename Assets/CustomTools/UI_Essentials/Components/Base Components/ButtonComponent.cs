@@ -1,17 +1,21 @@
-using UnityEngine;
 using UnityEngine.UI;
 
 namespace CustomTools.UI_Essentials.Components
 {
-    [RequireComponent(typeof(Button))]
-    public abstract class ButtonComponent : BaseComponent<Button>
-    {
-        protected override void Awake()
-        {
-            base.Awake();
-            Component.onClick.AddListener(OnButtonClicked);
-        }
+	public abstract class ButtonComponent : Button, IComponent<Button>
+	{
+		protected override void Awake()
+		{
+			base.Awake();
+			onClick.AddListener(OnButtonClicked);
+		}
 
-        protected abstract void OnButtonClicked();
-    }
+		public Button Component
+		{
+			get;
+			set;
+		}
+
+		protected abstract void OnButtonClicked();
+	}
 }

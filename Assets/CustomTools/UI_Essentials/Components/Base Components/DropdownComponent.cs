@@ -2,17 +2,20 @@ using TMPro;
 
 namespace CustomTools.UI_Essentials.Components
 {
-    using UnityEngine;
+	public abstract class DropdownComponent : TMP_Dropdown, IComponent<TMP_Dropdown>
+	{
+		protected override void Awake()
+		{
+			base.Awake();
+			onValueChanged.AddListener(OnValueChanged);
+		}
 
-    [RequireComponent(typeof(TMP_Dropdown))]
-    public abstract class DropdownComponent : BaseComponent<TMP_Dropdown>
-    {
-        protected override void Awake()
-        {
-            base.Awake();
-            Component.onValueChanged.AddListener(OnValueChanged);
-        }
+		public TMP_Dropdown Component
+		{
+			get;
+			set;
+		}
 
-        protected abstract void OnValueChanged(int value);
-    }
+		protected abstract void OnValueChanged(int value);
+	}
 }

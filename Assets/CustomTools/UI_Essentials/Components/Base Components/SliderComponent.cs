@@ -2,17 +2,14 @@ using UnityEngine.UI;
 
 namespace CustomTools.UI_Essentials.Components
 {
-    using UnityEngine;
+	public abstract class SliderComponent : Slider, IComponent<Slider>
+	{
+		protected override void Awake()
+		{
+			base.Awake();
+			onValueChanged.AddListener(OnValueChanged);
+		}
 
-    [RequireComponent(typeof(Slider))]
-    public abstract class SliderComponent : BaseComponent<Slider>
-    {
-        protected override void Awake()
-        {
-            base.Awake();
-            Component.onValueChanged.AddListener(OnValueChanged);
-        }
-
-        protected abstract void OnValueChanged(float value);
-    }
+		protected abstract void OnValueChanged(float value);
+	}
 }
