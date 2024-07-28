@@ -22,8 +22,8 @@ public abstract class Window : MonoBehaviour, IWindow, IDragHandler
 	[field: SerializeField]
 	protected float TransitionDuration = 1f;
 
-	readonly private WindowTransitionArgs _hideArgs = new WindowTransitionArgs(false);
-	readonly private WindowTransitionArgs _showArgs = new WindowTransitionArgs(true);
+	private readonly WindowTransitionArgs _hideArgs = new WindowTransitionArgs(false);
+	private readonly WindowTransitionArgs _showArgs = new WindowTransitionArgs(true);
 	private bool _isWindowsShown;
 	protected Canvas WindowCanvas;
 
