@@ -1,6 +1,6 @@
 // Created by : Ertan TURAN
 // Created : 20 / 07 / 2024
-// Last change : 20 / 07 / 2024
+// Last change : 28 / 07 / 2024
 // File Name : Window.cs
 // Project Name : CustomTools.UI_Essentials
 
@@ -8,8 +8,10 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.EventSystems;
 
-public abstract class Window : MonoBehaviour, IWindow
+[RequireComponent(typeof(Canvas))]
+public abstract class Window : MonoBehaviour, IWindow, IDragHandler
 {
 	// ReSharper disable once InconsistentNaming
 	public UnityEvent<bool> OnWindowHid;
@@ -20,16 +22,12 @@ public abstract class Window : MonoBehaviour, IWindow
 	[field: SerializeField]
 	protected float TransitionDuration = 1f;
 
-	[field: SerializeField]
-	public bool ShowAtStart
-	{
-		get;
-		set;
-	}
-
 	readonly private WindowTransitionArgs _hideArgs = new WindowTransitionArgs(false);
 	readonly private WindowTransitionArgs _showArgs = new WindowTransitionArgs(true);
 	private bool _isWindowsShown;
+	protected Canvas WindowCanvas;
+
+	protected RectTransform WindowRectTransform;
 
 	public bool ToggleHandle
 	{
@@ -45,6 +43,33 @@ public abstract class Window : MonoBehaviour, IWindow
 			}
 		}
 	}
+
+	protected void Awake()
+	{
+		Initialize();
+		if (ShowAtStart)
+		{
+			Show();
+		}
+
+		else if (!ShowAtStart)
+
+		{
+			Hide();
+		}
+	}
+
+	public void OnDrag(PointerEventData eventData)
+	{
+		WindowRectTransform.anchoredPosition = WindowRectTransform.anchoredPosition + eventData.delta;
+	}
+
+	[field: SerializeField]
+	public bool ShowAtStart
+	{
+		get;
+		set;
+	} = true;
 
 	public bool IsWindowsShown
 	{
@@ -70,26 +95,16 @@ public abstract class Window : MonoBehaviour, IWindow
 		}
 	}
 
-	protected void Awake()
-	{
-		Initialize();
-		if (ShowAtStart)
-		{
-			Show();
-		}
-
-		else if (!ShowAtStart)
-
-		{
-			Hide();
-		}
-	}
-
 
 	public event EventHandler<WindowEventArgs> OnWindowStateChanged;
 
 
-	public abstract void Initialize();
+	public virtual void Initialize()
+	{
+		WindowRectTransform = GetComponent<RectTransform>();
+		WindowCanvas = GetComponent<Canvas>();
+	}
+
 	public abstract void Setup();
 	public abstract void TearDown();
 
